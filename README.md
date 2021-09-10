@@ -20,4 +20,4 @@ Few things required before getting started with the project:
       
 1. Simply checkout the project
 2. Configure IDE to point to the required gradle version
-3. Voila! Project is ready to run
+3. Voila! Project is ready to run - gradle bootrun

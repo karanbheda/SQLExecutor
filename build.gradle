@@ -16,6 +16,8 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+    compile('com.zaxxer:HikariCP:3.4.5')
+    compile('mysql:mysql-connector-java')
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

@@ -40,14 +40,17 @@ public class QueryDao {
     try (Connection connection = ds.getConnection();
         PreparedStatement ps = connection.prepareStatement(query)) {
       //query might not be select, in that case no RS. Check for type of query
+      long startTime = System.currentTimeMillis();
+      //Run the rest of the program
       try (ResultSet rs = ps.executeQuery()) {
+        response.setResponseTime((System.currentTimeMillis() - startTime) / 1000d);
         ResultSetMetaData metaData = rs.getMetaData();
         List<Map<String, Object>> sqlData = new ArrayList<>();
 
         while (rs.next()) {
           Map<String, Object> rowData = new HashMap<>();
-          for (int i = 0; i < metaData.getColumnCount(); i++) {
-            rowData.put(metaData.getCatalogName(i), rs.getObject(metaData.getCatalogName(i)));
+          for (int i = 1; i <= metaData.getColumnCount(); i++) {
+            rowData.put(metaData.getColumnName(i), rs.getObject(metaData.getColumnName(i)));
           }
 
           sqlData.add(rowData);

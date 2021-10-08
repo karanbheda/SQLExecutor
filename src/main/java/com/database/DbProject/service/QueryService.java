@@ -18,21 +18,28 @@ public class QueryService {
 
   public SqlResponse getSqlOutput(Map<String, Object> request) {
     String query = (String) request.get("query");
-    String page = (String) request.get("page");
-    String records = (String) request.get("records");
+    Integer pageNo = (Integer) request.get("page");
+    Integer rows = (Integer) request.get("records");
+    boolean fromCache = (boolean) request.getOrDefault("fromCache", false);
 
     SqlResponse response = new SqlResponse();
-    if (commonUtility.isNumeric(page) && commonUtility.isNumeric(records)) {
-      response = queryDao.getSqlOutput(query);
+    if ((!query.isEmpty() || fromCache) && pageNo >= 0 && rows > 0) {
+      SqlResponse rawResponse;
+      if (fromCache) {
+        rawResponse = queryDao.getPreviousOutput();
+      } else {
+        rawResponse = queryDao.getSqlOutput(query);
+      }
 
+      response.setTotalRecords(rawResponse.getTotalRecords());
+      response.setMessage(rawResponse.getMessage());
+      response.setResponseTime(rawResponse.getResponseTime());
       //perform pagination
-      if (response.getData() != null && response.getData().size() > 0) {
-        int pageNo = Integer.parseInt(page);
-        int rows = Integer.parseInt(records);
+      if (rawResponse.getData() != null && rawResponse.getData().size() > 0) {
         int startIdx = (pageNo - 1) * rows;
-        int endIdx = Math.min(response.getData().size(), startIdx + rows);
+        int endIdx = Math.min(rawResponse.getData().size(), startIdx + rows);
 
-        response.setData(response.getData().subList(startIdx, endIdx));
+        response.setData(rawResponse.getData().subList(startIdx, endIdx));
       }
     }
 

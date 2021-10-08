@@ -7,7 +7,7 @@ public class SqlResponse {
 
   private List<Map<String, Object>> data;
 
-  private int responseTime;
+  private double responseTime;
 
   private String message;
 
@@ -21,11 +21,11 @@ public class SqlResponse {
     this.data = data;
   }
 
-  public int getResponseTime() {
+  public double getResponseTime() {
     return responseTime;
   }
 
-  public void setResponseTime(int responseTime) {
+  public void setResponseTime(double responseTime) {
     this.responseTime = responseTime;
   }
 
@@ -43,5 +43,15 @@ public class SqlResponse {
 
   public void setTotalRecords(int totalRecords) {
     this.totalRecords = totalRecords;
+  }
+
+  @Override
+  public String toString() {
+    return "SqlResponse{" +
+        "data=" + data +
+        ", responseTime=" + responseTime +
+        ", message='" + message + '\'' +
+        ", totalRecords=" + totalRecords +
+        '}';
   }
 }

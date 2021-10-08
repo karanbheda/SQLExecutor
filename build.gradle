@@ -11,6 +11,9 @@ sourceCompatibility = '1.8'
 
 repositories {
     mavenCentral()
+    maven {
+        url "http://redshift-maven-repository.s3-website-us-east-1.amazonaws.com/release"
+    }
 }
 
 dependencies {
@@ -18,6 +21,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
     compile('com.zaxxer:HikariCP:3.4.5')
     compile('mysql:mysql-connector-java')
+    compile('com.amazon.redshift:redshift-jdbc42:1.2.43.1067')
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

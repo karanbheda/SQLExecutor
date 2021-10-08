@@ -5,11 +5,13 @@ import java.util.Map;
 
 public class SqlResponse {
 
-  List<Map<String, Object>> data;
+  private List<Map<String, Object>> data;
 
-  int responseTime;
+  private int responseTime;
 
-  String message;
+  private String message;
+
+  private int totalRecords;
 
   public List<Map<String, Object>> getData() {
     return data;
@@ -33,5 +35,13 @@ public class SqlResponse {
 
   public void setMessage(String message) {
     this.message = message;
+  }
+
+  public int getTotalRecords() {
+    return totalRecords;
+  }
+
+  public void setTotalRecords(int totalRecords) {
+    this.totalRecords = totalRecords;
   }
 }

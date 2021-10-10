@@ -66,6 +66,14 @@ public class QueryDao {
 
   public boolean changeDbServer(final String dbServer) {
     DB_SV_NAME = dbServer;
+    switch (DB_SV_NAME) {
+      case "rds":
+        DB_NAME = "instacart";
+        break;
+      case "mysql":
+      default:
+        DB_NAME = "Instacart";
+    }
     return true;
   }
 

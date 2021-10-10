@@ -2,8 +2,10 @@ package com.database.DbProject.controller;
 
 import com.database.DbProject.dto.SqlResponse;
 import com.database.DbProject.service.QueryService;
+import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,5 +36,10 @@ public class QueryController {
   @PostMapping("changeDb")
   public boolean changeDb(@RequestParam("name") String db) {
     return service.changeDb(db);
+  }
+
+  @GetMapping("getDbList")
+  public List<String> getDbList() {
+    return service.getDbList();
   }
 }

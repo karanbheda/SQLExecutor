@@ -32,7 +32,6 @@ public class QueryDao {
     //db call and fill response
     try (Connection connection = ds.getConnection(DB_SV_NAME, DB_NAME);
         PreparedStatement ps = connection.prepareStatement(query)) {
-      //query might not be select, in that case no RS. Check for type of query
       long startTime = System.currentTimeMillis();
       //Run the rest of the program
       try (ResultSet rs = ps.executeQuery()) {
@@ -75,5 +74,34 @@ public class QueryDao {
     return true;
   }
 
+  private String getDatabaseListQuery() {
+    switch (DB_SV_NAME) {
+      case "rds":
+        return "select datname as database_name\n"
+            + "from pg_database\n"
+            + "order by oid;";
+      case "mysql":
+      default:
+        return "show databases;";
+    }
+  }
+
+  public List<String> getDbList() {
+    List<String> databaseList = new ArrayList<>();
+    //db call and fill response
+    try (Connection connection = ds.getConnection(DB_SV_NAME, DB_NAME);
+        PreparedStatement ps = connection.prepareStatement(this.getDatabaseListQuery())) {
+      //Run the rest of the program
+      try (ResultSet rs = ps.executeQuery()) {
+        while (rs.next()) {
+          databaseList.add(rs.getString(1));
+        }
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    return databaseList;
+  }
 }
 

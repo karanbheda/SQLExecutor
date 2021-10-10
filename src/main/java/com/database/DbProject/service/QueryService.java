@@ -46,9 +46,11 @@ public class QueryService {
     return response;
   }
 
-  public SqlResponse getPreviousOutput() {
-    //perform pagination
+  public boolean changeDbServer(final String dbServer) {
+    return queryDao.changeDbServer(dbServer);
+  }
 
-    return queryDao.getSqlOutput("asd");
+  public boolean changeDb(final String db) {
+    return queryDao.changeDbServer(db);
   }
 }

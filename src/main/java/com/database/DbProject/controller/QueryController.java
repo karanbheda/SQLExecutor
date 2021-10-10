@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /* @RestController is a controller but enforces REST framework*/
@@ -25,4 +26,13 @@ public class QueryController {
     return service.getSqlOutput(request);
   }
 
+  @PostMapping("changeDbServer")
+  public boolean changeDbServer(@RequestParam("name") String dbServer) {
+    return service.changeDbServer(dbServer);
+  }
+
+  @PostMapping("changeDb")
+  public boolean changeDb(@RequestParam("name") String db) {
+    return service.changeDb(db);
+  }
 }

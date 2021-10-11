@@ -3,6 +3,7 @@ package com.database.DbProject.service;
 import com.database.DbProject.dao.QueryDao;
 import com.database.DbProject.dto.SqlResponse;
 import com.database.DbProject.utility.CommonUtility;
+import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,9 +47,15 @@ public class QueryService {
     return response;
   }
 
-  public SqlResponse getPreviousOutput() {
-    //perform pagination
+  public boolean changeDbServer(final String dbServer) {
+    return queryDao.changeDbServer(dbServer);
+  }
 
-    return queryDao.getSqlOutput("asd");
+  public boolean changeDb(final String db) {
+    return queryDao.changeDb(db);
+  }
+
+  public List<String> getDbList() {
+    return queryDao.getDbList();
   }
 }

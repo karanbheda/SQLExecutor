@@ -1,45 +1,37 @@
 package com.database.DbProject.dao;
 
+import com.database.DbProject.config.DbConfig;
 import com.database.DbProject.dto.SqlResponse;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
-import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class QueryDao {
 
   @Autowired
-  @Qualifier("mysql")
-  DataSource ds;
+  DbConfig ds;
 
-  private static final String JDBC_URL =
-      "jdbc:redshift://redshift-cluster-1.cmrkw7vai7ws.us-east-2.redshift.amazonaws.com:5439/dev";
-  private static final String USERNAME = "awsuser";
-  private static final String PASSWORD = "CS527Rutgers";
-  private static final String CLASS_NAME = "com.amazon.redshift.jdbc42.Driver";
+  //selected database server and database
+  private static String DB_SV_NAME = "mysql";
+  private static String DB_NAME = "Instacart";
 
   //cached previous result to support pagination
-  public static SqlResponse response = new SqlResponse();
+  private static SqlResponse response = new SqlResponse();
 
   public SqlResponse getSqlOutput(final String query) {
     response = new SqlResponse();
 
     //db call and fill response
-    try (Connection connection = ds.getConnection();
+    try (Connection connection = ds.getConnection(DB_SV_NAME, DB_NAME);
         PreparedStatement ps = connection.prepareStatement(query)) {
-      //query might not be select, in that case no RS. Check for type of query
       long startTime = System.currentTimeMillis();
       //Run the rest of the program
       try (ResultSet rs = ps.executeQuery()) {
@@ -72,38 +64,52 @@ public class QueryDao {
     return response;
   }
 
-  public boolean test() {
-    Connection connection = null;
-    try {
-      Class.forName(CLASS_NAME);
-    } catch (ClassNotFoundException e) {
-      System.out.println("JDBC Driver class could not loaded");
-      System.out.println(e.getMessage());
+  public boolean changeDbServer(final String dbServer) {
+    DB_SV_NAME = dbServer;
+    switch (DB_SV_NAME) {
+      case "rds":
+        DB_NAME = "instacart";
+        break;
+      case "mysql":
+      default:
+        DB_NAME = "Instacart";
     }
-    Properties properties = getPropertiesForDriverManager();
-    try {
-      System.out.println("Connecting to the database...");
-      connection = DriverManager.getConnection(JDBC_URL, properties);
-      int count = 0;
-      try (PreparedStatement ps = connection.prepareStatement("select * from aisles");
-          ResultSet rs = ps.executeQuery()) {
-        while (rs.next()) {
-          count++;
-        }
-      }
-      System.out.println(count);
-      return true;
-    } catch (SQLException e) {
-      System.out.println(e.getMessage());
-    }
-    return false;
+    return true;
   }
 
-  private Properties getPropertiesForDriverManager() {
-    Properties props = new Properties();
-    props.setProperty("user", USERNAME);
-    props.setProperty("password", PASSWORD);
-    return props;
+  public boolean changeDb(final String db) {
+    DB_NAME = db;
+    return true;
+  }
+
+  private String getDatabaseListQuery() {
+    switch (DB_SV_NAME) {
+      case "rds":
+        return "select datname as database_name\n"
+            + "from pg_database\n"
+            + "order by oid;";
+      case "mysql":
+      default:
+        return "show databases;";
+    }
+  }
+
+  public List<String> getDbList() {
+    List<String> databaseList = new ArrayList<>();
+    //db call and fill response
+    try (Connection connection = ds.getConnection(DB_SV_NAME, DB_NAME);
+        PreparedStatement ps = connection.prepareStatement(this.getDatabaseListQuery())) {
+      //Run the rest of the program
+      try (ResultSet rs = ps.executeQuery()) {
+        while (rs.next()) {
+          databaseList.add(rs.getString(1));
+        }
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    return databaseList;
   }
 }
 

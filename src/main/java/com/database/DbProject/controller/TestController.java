@@ -21,10 +21,10 @@ public class TestController {
   /* since this is under RestController, it automatically spits out JSON
     This is configurable inside @GetMapping
    */
-//  @GetMapping("test")
-//  public SqlResponse test() {
-//    return service.getSqlOutput();
-//  }
+  @GetMapping("test")
+  public boolean test() {
+    return true;
+  }
 
   @GetMapping("test1")
   public boolean test1() {

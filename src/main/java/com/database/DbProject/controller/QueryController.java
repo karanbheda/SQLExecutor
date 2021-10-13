@@ -39,7 +39,7 @@ public class QueryController {
   }
 
   @GetMapping("getDbList")
-  public List<String> getDbList() {
+  public List<Map<String, Object>> getDbList() {
     return service.getDbList();
   }
 }

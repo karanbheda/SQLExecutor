@@ -40,7 +40,7 @@
 
 
             <div class="form-button mt-3">
-              <button id="run" type="submit" class="btn btn-primary">Run!</button>
+              <button id="run" type="submit" class="btn btn-primary" onclick="PostFunction('runQuery')">Run!</button>
             </div>
           </form>
         </div>
@@ -75,21 +75,21 @@
       })
     })()
 
-$(document).ready(function () {
 
-    var ans = {
+ function GetFunction()
+ {
+   var ans = {
     query:"SELECT * FROM aisles",
     page:1,
     records:50,
     fromCache: false
     };
-
     $.ajax({
-        url: '/queryApi/query',
-        data: JSON.stringify(ans),
+        url: '/queryApi/getDbList',
+        data: {},
         dataType: 'json',
         contentType: 'application/json; charset=utf-8',
-        type: "POST",
+        type: "GET",
         async: true,
         success: function (data) {
                 alert(data.query);
@@ -101,7 +101,36 @@ $(document).ready(function () {
             alert('Error occured while saving offer recipes ');
         }
     })
-    });
+ }
+
+ function PostFunction(funcName)
+ {
+   var AppPath = '/queryApi/'+ funcName;
+   var ans = {
+    query:$("#query").val(),
+    page:1,
+    records:50,
+    fromCache: false
+    };
+    $.ajax({
+        url: AppPath,
+        data: JSON.stringify(ans) ,
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+        type: "POST",
+        async: true,
+        success: function (data) {
+        debugger;
+                alert(data.query);
+                $("#hi").append(data);
+                return false;
+
+        },
+        error: function () {
+            alert('Error occured while saving offer recipes ');
+        }
+    })
+ }
 
 
 

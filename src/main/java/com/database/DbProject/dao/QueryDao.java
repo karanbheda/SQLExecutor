@@ -94,15 +94,24 @@ public class QueryDao {
     }
   }
 
-  public List<String> getDbList() {
-    List<String> databaseList = new ArrayList<>();
+  public List<Map<String, Object>> getDbList() {
+    List<Map<String, Object>> databaseList = new ArrayList<>();
     //db call and fill response
     try (Connection connection = ds.getConnection(DB_SV_NAME, DB_NAME);
         PreparedStatement ps = connection.prepareStatement(this.getDatabaseListQuery())) {
       //Run the rest of the program
       try (ResultSet rs = ps.executeQuery()) {
         while (rs.next()) {
-          databaseList.add(rs.getString(1));
+          Map<String, Object> rowData = new HashMap<>();
+          String dbName = rs.getString(1);
+          boolean isSelected = false;
+          if (dbName.equalsIgnoreCase(DB_NAME)) {
+            isSelected = true;
+          }
+
+          rowData.put("value", dbName);
+          rowData.put("isSelected", isSelected);
+          databaseList.add(rowData);
         }
       }
     } catch (Exception e) {

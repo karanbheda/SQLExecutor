@@ -55,7 +55,7 @@ public class QueryService {
     return queryDao.changeDb(db);
   }
 
-  public List<String> getDbList() {
+  public List<Map<String, Object>> getDbList() {
     return queryDao.getDbList();
   }
 }

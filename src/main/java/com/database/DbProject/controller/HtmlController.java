@@ -18,7 +18,7 @@ public class HtmlController {
   @GetMapping("/index")
   public ModelAndView test() {
     ModelAndView view = new ModelAndView();
-    view.setViewName("index");
+    view.setViewName("indexnew");
     return view;
   }
 }

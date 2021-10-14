@@ -78,9 +78,9 @@ html, body {
     padding: 2.5rem;
     display: inline-block;
     width: 100%;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 2.5rem;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
     text-align: left;
     -webkit-transition: all 0.4s ease;
     transition: all 0.4s ease;
@@ -200,7 +200,7 @@ html, body {
 .outputBox {
     width: 70rem;
     height: 50rem;
-    border-radius: 5px;
+    border-radius: 6px;
     border: 3px var(--border-color) solid;
     padding-bottom:1rem;
     padding-top:  1rem;
@@ -208,7 +208,7 @@ html, body {
 
 .result-footer {
     position: fixed;
-    bottom: 5rem;
+    bottom: 4rem;
     width: inherit;
 }
 
@@ -234,7 +234,7 @@ table#result  {
 }
 
 table#result thead { 
-    margin-top: -20px; 
+    margin-top: -2rem; 
     position: absolute; 
 }
 
@@ -255,6 +255,9 @@ table#result th, table#result td {
     overflow: hidden;
     text-overflow: ellipsis;
     display: inline-block;
+}
+
+table#result td {
     border-right: 1px solid var(--border-color);
 }
 
@@ -337,6 +340,23 @@ table#result::-webkit-scrollbar {
 
 .horizontal > li:first-child > a {
     font-weight: 600;
+}
+
+.modal-content {
+    background: var(--background-color) !important;
+}
+
+.modal-header {
+    border-bottom: 1px solid var(--border-color) !important;
+}
+
+.modal-footer {
+    border-top: 1px solid var(--border-color) !important;
+}
+
+.modal-footer > button{
+    background: var(--button-bg);
+    color: var(--text-color);
 }
 
 @media only screen and (min-width: 200px) and (max-width: 767px) {

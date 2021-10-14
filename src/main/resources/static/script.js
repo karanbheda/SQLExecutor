@@ -2,6 +2,7 @@ var cachedData = [];
 var totalRecords = 0;
 var records = 50;
 var pageNo = 1;
+var message = "";
 
 $("#erDiagButton").click(function () {
     $("#sqlOutput").hide();
@@ -145,7 +146,16 @@ function SqlResult(page) {
         type: "POST",
         async: true,
         success: function (obj) {
-            if (obj != undefined && obj.data != undefined) {
+            if (obj != undefined) {
+                if(obj.data == undefined) {
+                    $("#message").html(obj.message);
+                    $("#message").show();
+                    $("#result").hide();
+                    $("#recordDiv").hide();
+                    $("#pagination").hide();
+                    $("#exec-time").hide();
+                    return;
+                }
                 totalRecords = obj.totalRecords;
                 console.log(totalRecords)
                 cachedData = new Array(totalRecords);
@@ -161,12 +171,16 @@ function SqlResult(page) {
                 for (var k = 0; k < obj.data.length; k++) {
                     table += '<tr>';
                     for (var j = 0; j < cols.length; j++) {
-                        table += '<td title=' + (obj.data[k])[cols[j]] + '>' + (obj.data[k])[cols[j]] + '</td>';
+                        table += '<td title=\'' + (obj.data[k])[cols[j]] + '\'>' + (obj.data[k])[cols[j]] + '</td>';
                     }
                     table += '</tr>';
                 }
 
                 $("#result").html(table + "</tbody>");
+                $("#message").hide();
+                $("#result").show();
+                $("#pagination").show();
+                $("#recordDiv").show();
                 $("#exec-time").html("Execution time:" + obj.responseTime + " s")
                 refreshPages();
             }

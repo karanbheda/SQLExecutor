@@ -1,17 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap');
 
 [data-theme="dark"] {
-    --background-color: #152733;
+    --background-color: rgb(46,47,43);
     --text-color: #fff;
     --border-color: #fff;
     --table-even: rgb(187, 186, 186);
+    --input-bg: rgb(59,59,59);
+    --button-bg: #6C757D;
 }
 
 [data-theme="light"] {
-    --background-color: #f7f7f7;
+    --background-color: #dedede;
     --text-color: rgb(0, 0, 0);
     --border-color: rgb(0,0,0);
     --table-even: rgb(187, 186, 186);
+    --input-bg: #f7f7f7;
+    --button-bg: #efefef;
 }
 
 
@@ -38,7 +42,6 @@ html, body {
 .form-holder {
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
       text-align: center;
       min-height: 100vh;
@@ -46,11 +49,11 @@ html, body {
 }
 
 .resultArea {
-    flex: 4;
+    flex: 2;
 }
 
 .outputBox {
-    margin: 5rem 2rem;
+   margin-top: 1.5rem;
 
 }
 
@@ -66,12 +69,12 @@ html, body {
     justify-content: center;
     -webkit-align-items: center;
     align-items: center;
-    padding: 60px;
+    padding: 1.5rem;
 }
 
 .form-content .form-items {
     border: 3px solid var(--border-color);
-    padding: 40px;
+    padding: 2.5rem;
     display: inline-block;
     width: 100%;
     min-width: 540px;
@@ -128,10 +131,11 @@ html, body {
 
 
 .btn-primary{
-    background-color: #6C757D;
+    background-color: var(--input-bg) ;
+    color: var(--text-color);
     outline: none;
     border: 0px;
-     box-shadow: none;
+    box-shadow: none;
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active{
@@ -146,6 +150,7 @@ html, body {
     width: 100%;
     padding: 8px 20px;
     border-radius: 6px;
+    min-height: 15rem;
     text-align: left;
     background-color: var(--background-color);
     border: 0;
@@ -188,6 +193,10 @@ html, body {
     display: none;
 }
 
+#query, #dbname {
+    background-color: var(--input-bg);
+}
+
 #sqlOutput {
     width: 70rem;
     height: 50rem;
@@ -211,6 +220,7 @@ html, body {
 #recordDiv, #pagination {
     float: left;
     margin-left: 1rem;
+    display: none;
 }
 
 table#result  { 
@@ -219,6 +229,8 @@ table#result  {
     border-collapse: collapse; 
     height: 90%;
     margin: 1rem 1rem 0 1rem;
+    scrollbar-color: #6969dd #e0e0e0;
+    scrollbar-width: thin;
 }
 
 table#result thead { 
@@ -228,4 +240,92 @@ table#result thead {
 
 table#result tr:nth-child(even) { 
     background: var(--table-even); 
+}
+
+table#result th {
+    text-align: center;
+    font-weight: 700;
+    border-bottom: 1px solid var(--border-color) !important;
+}
+
+table#result th, table#result td {
+    width: 200px;
+    padding-left: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    border-right: 1px solid var(--border-color);
+}
+
+table#result th:last-child, table#result td:last-child {
+    border: none;
+}
+
+.table-container {
+    height: 100%;
+    overflow-x: auto;
+}
+
+ul.horizontal {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow: hidden;
+    background-color: transparent;
+}
+
+ul.horizontal li {
+    float: left;
+}
+
+ul.horizontal li a {
+    display: inline-block;
+    color: var(--text-color);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+ul.horizontal li a:hover:not(.active) {
+    background-color: transparent;
+    text-decoration: underline;
+    text-decoration-color: var(--text-color);
+}
+
+ul.horizontal li a.active {
+    background-color:transparent;
+}
+
+#message {
+    margin: 0 2rem;
+}
+
+table#result::-webkit-scrollbar {
+    width: 12px;               /* width of the entire scrollbar */
+  }
+  
+  table#result::-webkit-scrollbar-track {
+    background: transparent;        /* color of the tracking area */
+  }
+  
+  table#result::-webkit-scrollbar-thumb {
+    background-color: var(--input-bg);    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: transparent  /* creates padding around scroll thumb */
+  }
+
+
+
+@media only screen and (min-width: 200px) and (max-width: 767px)  {
+    *,body {
+        font-size: 12px;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 1400px)  {
+    *,body {
+        font-size: 12px;
+    }
+   
 }

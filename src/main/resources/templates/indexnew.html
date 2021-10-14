@@ -11,6 +11,13 @@
 
 </head>
 <div class="form-body">
+  <div class="navbar">
+    <ul class="horizontal">
+      <li><a class="active" href="javascript:void(0)">CS-527 Project</a></li>
+      <li class="rightli" style="float:right"><a id="theme" href="javascript:void(0)">Theme</a></li>
+      <li class="rightli" style="float:right"><a href="javascript:void(0)">Devs</a></li>
+    </ul>
+  </div>
   <div class="row">
     <div class="form-holder">
       <div class="form-content">
@@ -27,7 +34,7 @@
 
               <input type="radio" class="btn-check" name="choice" id="sql" autocomplete="off" required
                 onchange="PostFunction('changeDbServer?name=mysql')" checked value='1'>
-              <label for="sql">SQL</label>
+              <label for="sql">MySQL</label>
 
               <input type="radio" class="btn-check" name="choice" id="redshift" autocomplete="off" required
                 onchange="PostFunction('changeDbServer?name=rds')" value="2">
@@ -46,9 +53,8 @@
             </div>
 
             <div class="form-button mt-3">
-              <a id="runButton" class="btn btn-secondary" onclick="SqlResult(1)">Run!</a>
+              <a id="runButton" class="btn btn-secondary" onclick="SqlResult(1)">Run Query</a>
               <a id="erDiagButton" class="btn btn-secondary">Show ER</a>
-              <a id="theme" class="btn btn-secondary">THEME!!!!!</a>
             </div>
           </form>
         </div>
@@ -64,20 +70,23 @@
       </div>
       <!-- table result here-->
       <div class="outputBox" id="sqlOutput">
-        <table id="result">
+        <div class="table-container">
+          <div id="message"></div>
+          <table id="result">
 
-        </table>
+          </table>
+        </div>
         <div class="result-footer">
           <div id="recordDiv">
-            Displaying 
+            Displaying
             <select id="selectRecords" onselect="">
               <option value=50> 50</option>
               <option value=100> 100</option>
               <option value=200> 200</option>
             </select>
-             Rows
+            Rows
           </div>
-          
+
           <div id="pagination"></div>
           <div id="exec-time">
           </div>

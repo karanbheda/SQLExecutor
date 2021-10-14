@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -83,7 +83,9 @@
     page:1,
     records:50,
     fromCache: false
-    };
+     };
+                   
+
     $.ajax({
         url: '/queryApi/getDbList',
         data: {},
@@ -112,6 +114,16 @@
     records:50,
     fromCache: false
     };
+
+     if ($("#dbname").val() == "" || $("#dbname").length == 0) {
+         alert("Please select Database Name");
+         return false;
+     }
+     else if ($("#query").val() == "" || $("#query").length == 0) {
+         alert("Please enter a query");
+         return false;
+     }  
+
     $.ajax({
         url: AppPath,
         data: JSON.stringify(ans) ,

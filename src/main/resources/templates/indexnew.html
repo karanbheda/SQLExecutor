@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML>
 <html>
 
 <head>
@@ -11,13 +11,18 @@
 
 </head>
 <div class="form-body">
-  <div class="row">
+    <div class="form-loader">
+    <img src="../Spinner.gif" alt="Loader" id="loader">
+    </div>
+    <div class="row">
     <div class="form-holder">
       <div class="form-content">
         <div class="form-items">
           <h3>Query Execution Engine</h3><br><br>
           <form class="requires-validation" novalidate>
-            <div class="col-md-12 mt-3">
+            
+
+              <div class="col-md-12 mt-3">
               <label class="mb-3 mr-1" for="dbname">Database: </label>
               <!--              <input id="dbname" type="text" placeholder="Name of database">-->
               <select id="dbname">
@@ -56,33 +61,32 @@
     </div>
     <!-- this is where er & result will go-->
     <div class="resultArea">
-      <!-- er diag here-->
-      <div class="outputBox" id="erDiag">
-        <div class="image">
-          <img src="abc.jpg">
+        <!-- er diag here-->
+        <div class="outputBox" id="erDiag">
+            <div class="image">
+                <img src="abc.jpg">
+            </div>
         </div>
-      </div>
-      <!-- table result here-->
-      <div class="outputBox" id="sqlOutput">
-        <table id="result">
+        <!-- table result here-->
+        <div class="outputBox" id="sqlOutput">
+            <table id="result">
+            </table>
+            <div class="result-footer">
+                <div id="recordDiv">
+                    Displaying
+                    <select id="selectRecords" onselect="">
+                        <option value=50> 50</option>
+                        <option value=100> 100</option>
+                        <option value=200> 200</option>
+                    </select>
+                    Rows
+                </div>
 
-        </table>
-        <div class="result-footer">
-          <div id="recordDiv">
-            Displaying 
-            <select id="selectRecords" onselect="">
-              <option value=50> 50</option>
-              <option value=100> 100</option>
-              <option value=200> 200</option>
-            </select>
-             Rows
-          </div>
-          
-          <div id="pagination"></div>
-          <div id="exec-time">
-          </div>
+                <div id="pagination"></div>
+                <div id="exec-time">
+                </div>
+            </div>
         </div>
-      </div>
     </div>
   </div>
 </div>

@@ -21,6 +21,7 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     -moz-osx-font-smoothing: grayscale;
+    font-size: 10px;
 }
 
 html, body {
@@ -46,7 +47,7 @@ html, body {
 }
 
 .resultArea {
-    flex: 4;
+    flex: 2;
 }
 
 .outputBox {
@@ -66,18 +67,17 @@ html, body {
     justify-content: center;
     -webkit-align-items: center;
     align-items: center;
-    padding: 60px;
-}
+    padding: 3.5px;
+}   
 
 .form-content .form-items {
     border: 3px solid var(--border-color);
-    padding: 40px;
+    padding: 2.5rem;
     display: inline-block;
     width: 100%;
-    min-width: 540px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
-    border-radius: 10px;
+    border-radius: 2.5rem;
     text-align: left;
     -webkit-transition: all 0.4s ease;
     transition: all 0.4s ease;
@@ -228,4 +228,34 @@ table#result thead {
 
 table#result tr:nth-child(even) { 
     background: var(--table-even); 
+}
+
+#loader {
+        display: none;
+        z-index: 99;
+        position: absolute;
+        margin: 0 auto;
+        top: 40%;
+        left: 40%;
+        width: 12%;
+}
+
+.form-loader{
+    background: rgba(255,255,255,0.5);
+    z-index: 50;
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+}
+
+@media only screen and (min-width: 200px) and (max-width: 767px) {
+    *, body {
+        font-size: 12px;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1400px) {
+    *, body {
+        font-size: 12px;
+    }
 }

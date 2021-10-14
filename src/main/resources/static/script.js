@@ -15,10 +15,17 @@ $("input[type='radio']").click(function () {
     else if ($(this).val() === '2') {
         PostFunction('changeDbServer?name=rds');
     }
+    $("#loader").show();
+    $(".form-loader").show();
 
     setTimeout(() => {
-        GetFunction('getDbList');
+        GetFunction('getDbList');      
     }, 250)
+    setTimeout(() => {
+        $("#loader").hide();
+        $(".form-loader").hide();
+    }, 750)
+
 });
 
 $("#theme").click(function () {
@@ -35,8 +42,16 @@ $("#runButton").click(function () {
 });
 
 $(document).ready(function () {
+    //$("#loader").show();
+    $("#loader").show();
+    $(".form-loader").show();
+
+  
     GetFunction('getDbList');
     document.documentElement.setAttribute("data-theme", "dark");
+    $("#loader").hide();
+    $(".form-loader").hide();
+
 });
 
 function GetFunction(funcName) {
@@ -78,18 +93,7 @@ function PostFunction(funcName) {
         records: 50,
         fromCache: false
     };
-
-    /*if($("#dbname").val() == "" || $("#dbname").length == 0)
-    {
-    alert("Please select Db Name");
-    return false;
-    }
-
-    else if($("#query").val()== "" || $("#query").length == 0)
-    {
-      alert("Please enter a query");
-      return false;
-      }*/
+ 
 
 
     $.ajax({
@@ -130,12 +134,27 @@ function refreshPages() {
 }
 
 function SqlResult(page) {
+    $("#loader").show();
+    $(".form-loader").show();
+
+
+    if ($("#dbname").val() == "" || $("#dbname").length == 0) {
+        alert("Please select Database Name");
+        return false;
+    }
+    else if ($("#query").val() == "" || $("#query").length == 0) {
+        alert("Please enter a query");
+        return false;
+    }  
+
     var ans = {
         query: $("#query").val(),
         page: page,
         records: records,
         fromCache: false
     };
+
+
 
     $.ajax({
         url: '/queryApi/query',
@@ -170,6 +189,9 @@ function SqlResult(page) {
                 $("#exec-time").html("Execution time:" + obj.responseTime + " s")
                 refreshPages();
             }
+            $("#loader").hide();
+            $(".form-loader").hide();
+
 
         },
         error: function () {

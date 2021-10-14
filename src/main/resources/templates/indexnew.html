@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="../mainnew.css">
+  <link rel="stylesheet" type="text/css" href="../pagination.css">
+
+</head>
+<div class="form-body">
+  <div class="row">
+    <div class="form-holder">
+      <div class="form-content">
+        <div class="form-items">
+          <h3>Query Execution Engine</h3><br><br>
+          <form class="requires-validation" novalidate>
+            <div class="col-md-12 mt-3">
+              <label class="mb-3 mr-1" for="dbname">Database: </label>
+              <!--              <input id="dbname" type="text" placeholder="Name of database">-->
+              <select id="dbname">
+
+
+              </select><br><br>
+
+              <input type="radio" class="btn-check" name="choice" id="sql" autocomplete="off" required
+                onchange="PostFunction('changeDbServer?name=mysql')" checked value='1'>
+              <label for="sql">SQL</label>
+
+              <input type="radio" class="btn-check" name="choice" id="redshift" autocomplete="off" required
+                onchange="PostFunction('changeDbServer?name=rds')" value="2">
+              <label for="redshift">Redshift</label><br><br>
+
+              <div class="valid-feedback mv-up">You selected a framework!</div>
+              <div class="invalid-feedback mv-up">Please select a framework!</div>
+            </div>
+
+
+            <div class="col-md-12">
+              <textarea id="query" name="query" rows="4" cols="50"
+                placeholder="Enter your sql query"></textarea><br><br>
+              <div class="valid-feedback">Query is valid!</div>
+              <div class="invalid-feedback">Query cannot be blank!</div>
+            </div>
+
+            <div class="form-button mt-3">
+              <a id="runButton" class="btn btn-secondary" onclick="SqlResult(1)">Run!</a>
+              <a id="erDiagButton" class="btn btn-secondary">Show ER</a>
+              <a id="theme" class="btn btn-secondary">THEME!!!!!</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- this is where er & result will go-->
+    <div class="resultArea">
+      <!-- er diag here-->
+      <div class="outputBox" id="erDiag">
+        <div class="image">
+          <img src="abc.jpg">
+        </div>
+      </div>
+      <!-- table result here-->
+      <div class="outputBox" id="sqlOutput">
+        <table id="result">
+
+        </table>
+        <div class="result-footer">
+          <div id="recordDiv">
+            Displaying 
+            <select id="selectRecords" onselect="">
+              <option value=50> 50</option>
+              <option value=100> 100</option>
+              <option value=200> 200</option>
+            </select>
+             Rows
+          </div>
+          
+          <div id="pagination"></div>
+          <div id="exec-time">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://code.jquery.com/
+jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+  crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="../pagination.js"></script>
+<script src="../script.js"></script>
+
+</html>

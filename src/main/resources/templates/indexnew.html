@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML>
 <html>
 
 <head>
@@ -11,6 +11,9 @@
 
 </head>
 <div class="form-body">
+  <div class="form-loader">
+    <img src="../Spinner.gif" alt="Loader" id="loader">
+  </div>
   <div class="navbar">
     <ul class="horizontal">
       <li><a class="active" href="javascript:void(0)">CS-527 Project</a></li>
@@ -18,12 +21,15 @@
       <li class="rightli" style="float:right"><a href="javascript:void(0)">Devs</a></li>
     </ul>
   </div>
+
   <div class="row">
     <div class="form-holder">
       <div class="form-content">
         <div class="form-items">
           <h3>Query Execution Engine</h3><br><br>
           <form class="requires-validation" novalidate>
+
+
             <div class="col-md-12 mt-3">
               <label class="mb-3 mr-1" for="dbname">Database: </label>
               <!--              <input id="dbname" type="text" placeholder="Name of database">-->
@@ -65,7 +71,7 @@
       <!-- er diag here-->
       <div class="outputBox" id="erDiag">
         <div class="image">
-          <img src="abc.jpg">
+          <img src="../er.png">
         </div>
       </div>
       <!-- table result here-->
@@ -79,7 +85,7 @@
         <div class="result-footer">
           <div id="recordDiv">
             Displaying
-            <select id="selectRecords" onselect="">
+            <select id="selectRecords">
               <option value=50> 50</option>
               <option value=100> 100</option>
               <option value=200> 200</option>
@@ -93,6 +99,7 @@
         </div>
       </div>
     </div>
+
   </div>
 </div>
 <script src="https://code.jquery.com/

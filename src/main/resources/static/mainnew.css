@@ -1,5 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap');
 
+[data-theme="dark"] {
+    --background-color: #152733;
+    --text-color: #fff;
+    --border-color: #fff;
+    --table-even: rgb(187, 186, 186);
+}
+
+[data-theme="light"] {
+    --background-color: #f7f7f7;
+    --text-color: rgb(0, 0, 0);
+    --border-color: rgb(0,0,0);
+    --table-even: rgb(187, 186, 186);
+}
+
+
 *, body {
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
@@ -10,10 +25,16 @@
 
 html, body {
     height: 100%;
-    background-color: #152733;
+    background-color: var(--background-color);
     overflow: hidden;
+    color: var(--text-color);
 }
   
+.row {
+    display: flex;
+    flex-direction: initial;
+}
+
 .form-holder {
       display: flex;
       flex-direction: column;
@@ -21,6 +42,16 @@ html, body {
       align-items: center;
       text-align: center;
       min-height: 100vh;
+      flex: 1;
+}
+
+.resultArea {
+    flex: 4;
+}
+
+.outputBox {
+    margin: 5rem 2rem;
+
 }
 
 .form-holder .form-content {
@@ -39,7 +70,7 @@ html, body {
 }
 
 .form-content .form-items {
-    border: 3px solid #fff;
+    border: 3px solid var(--border-color);
     padding: 40px;
     display: inline-block;
     width: 100%;
@@ -54,7 +85,7 @@ html, body {
 }
 
 .form-content h3 {
-    color: #fff;
+    color: var(--text-color);
     text-align: left;
     font-size: 28px;
     font-weight: 600;
@@ -66,7 +97,7 @@ html, body {
 }
 
 .form-content p {
-    color: #fff;
+    color: var(--text-color);
     text-align: left;
     font-size: 17px;
     font-weight: 300;
@@ -76,7 +107,7 @@ html, body {
 
 
 .form-content label, .was-validated .form-check-input:invalid~.form-check-label, .was-validated .form-check-input:valid~.form-check-label{
-    color: #fff;
+    color: var(--text-color);
 }
 
 .form-content input[type=text], .form-content input[type=password], .form-content input[type=email], .form-content select {
@@ -86,7 +117,7 @@ html, body {
     border: 0;
     outline: 0;
     border-radius: 6px;
-    background-color: #fff;
+    background-color: var(--background-color);
     font-size: 15px;
     font-weight: 300;
     color: #8D8D8D;
@@ -116,11 +147,11 @@ html, body {
     padding: 8px 20px;
     border-radius: 6px;
     text-align: left;
-    background-color: #fff;
+    background-color: var(--background-color);
     border: 0;
     font-size: 15px;
     font-weight: 300;
-    color: #8D8D8D;
+    color: var(--text-color);
     outline: none;
     resize: none;
     height: 120px;
@@ -146,4 +177,55 @@ html, body {
 
 .valid-feedback{
    color: #2acc80;
+}
+
+.image {
+    height: max-content;
+    width: max-content;
+}
+
+#erDiag {
+    display: none;
+}
+
+#sqlOutput {
+    width: 70rem;
+    height: 50rem;
+    border-radius: 5px;
+    border: 3px var(--border-color) solid;
+    padding-bottom:1rem;
+    padding-top:  1rem;
+}
+
+.result-footer {
+    position: fixed;
+    bottom: 5rem;
+    width: inherit;
+}
+
+#exec-time {
+    float: right;
+    margin-right: 1rem;
+}
+
+#recordDiv, #pagination {
+    float: left;
+    margin-left: 1rem;
+}
+
+table#result  { 
+    display: inline-block; 
+    overflow: auto; 
+    border-collapse: collapse; 
+    height: 90%;
+    margin: 1rem 1rem 0 1rem;
+}
+
+table#result thead { 
+    margin-top: -20px; 
+    position: absolute; 
+}
+
+table#result tr:nth-child(even) { 
+    background: var(--table-even); 
 }

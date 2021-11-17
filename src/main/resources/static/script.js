@@ -29,6 +29,10 @@ $("input[type='radio']").click(function () {
 
 });
 
+$('select#dbname').on('change', function() {
+  PostFunction('changeDb?name='+this.value);
+});
+
 $("#theme").click(function () {
     if (document.documentElement.getAttribute("data-theme") == "dark") {
         document.documentElement.setAttribute("data-theme", "light");

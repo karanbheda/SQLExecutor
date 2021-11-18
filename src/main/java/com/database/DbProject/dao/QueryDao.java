@@ -20,8 +20,8 @@ public class QueryDao {
   DbConfig ds;
 
   //selected database server and database
-  private static String DB_SV_NAME = "mysql";
-  private static String DB_NAME = "Instacart";
+  private static String DB_SV_NAME = "mongodb";
+  private static String DB_NAME = "instacart";
 
   //cached previous result to support pagination
   private static SqlResponse response = new SqlResponse();

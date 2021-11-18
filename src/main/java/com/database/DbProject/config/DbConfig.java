@@ -33,16 +33,21 @@ public class DbConfig {
   public Connection getConnection(final String dbServerName, final String dbName)
       throws SQLException, ClassNotFoundException {
     String url, username, password, driver;
-
     switch (dbServerName) {
-      case "rds": //something
+      case "rds":
         url = env.getRequiredProperty("app.db.rds.url");
         username = env.getRequiredProperty("app.db.rds.username");
         password = env.getRequiredProperty("app.db.rds.password");
         driver = env.getRequiredProperty("app.db.rds.driver");
         break;
+      case "mongodb":
+        url = env.getRequiredProperty("app.db.mongo.url");
+        username = env.getRequiredProperty("app.db.mongo.username");
+        password = env.getRequiredProperty("app.db.mongo.password");
+        driver = env.getRequiredProperty("app.db.mongo.driver");
+        break;
       case "mysql":
-      default: //something
+      default:
         url = env.getRequiredProperty("app.db.mysql.url");
         username = env.getRequiredProperty("app.db.mysql.username");
         password = env.getRequiredProperty("app.db.mysql.password");

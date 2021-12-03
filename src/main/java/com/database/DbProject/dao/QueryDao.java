@@ -3,6 +3,7 @@ package com.database.DbProject.dao;
 import com.database.DbProject.config.DbConfig;
 import com.database.DbProject.dto.SqlResponse;
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -69,6 +70,7 @@ public class QueryDao {
   public boolean changeDbServer(final String dbServer) {
     DB_SV_NAME = dbServer;
     switch (DB_SV_NAME) {
+      case "mongodb":
       case "rds":
         DB_NAME = "instacart";
         break;
@@ -91,12 +93,37 @@ public class QueryDao {
             + "from pg_database\n"
             + "order by oid;";
       case "mysql":
+      case "mongodb":
       default:
-        return "show databases;";
+        return "show databases";
     }
   }
 
   public List<Map<String, Object>> getDbList() {
+    List<Map<String, Object>> databaseList = new ArrayList<>();
+    //db call and fill response
+    try (Connection connection = ds.getConnection(DB_SV_NAME, DB_NAME);) {
+      //Run the rest of the program
+      DatabaseMetaData metadata = connection.getMetaData();
+      try (ResultSet rs = metadata.getSchemas()) {
+        ResultSetMetaData metaData = rs.getMetaData();
+
+        while (rs.next()) {
+          Map<String, Object> rowData = new HashMap<>();
+          for (int i = 1; i <= metaData.getColumnCount(); i++) {
+            rowData.put(metaData.getColumnLabel(i), rs.getObject(metaData.getColumnName(i)));
+          }
+          databaseList.add(rowData);
+        }
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    return databaseList;
+  }
+
+  public List<Map<String, Object>> getDbList2() {
     List<Map<String, Object>> databaseList = new ArrayList<>();
     //db call and fill response
     try (Connection connection = ds.getConnection(DB_SV_NAME, DB_NAME);

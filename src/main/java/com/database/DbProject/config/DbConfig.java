@@ -14,23 +14,7 @@ public class DbConfig {
   @Autowired
   Environment env;
 
-//  @Bean(value = "mysql")
-//  public DataSource mysqlDatSource() {
-//    config
-//        .setJdbcUrl(env.getRequiredProperty("app.db.mysql.url"));
-//    config.setUsername(env.getRequiredProperty("app.db.mysql.username"));
-//    config.setPassword(env.getRequiredProperty("app.db.mysql.password"));
-//    config.setDriverClassName(env.getRequiredProperty("app.db.mysql.driver"));
-//    config.addDataSourceProperty("cachePrepStmts", env.getRequiredProperty("app.db.mysql.cache"));
-//    config.addDataSourceProperty("prepStmtCacheSize",
-//        env.getRequiredProperty("app.db.mysql.cacheSize"));
-//    config.addDataSourceProperty("prepStmtCacheSqlLimit",
-//        env.getRequiredProperty("app.db.mysql.cacheLimit"));
-//    mysqlDs = new HikariDataSource(config);
-//    return mysqlDs;
-//  }
-
-  public Connection getConnection(final String dbServerName, final String dbName)
+  public Connection getConnection(final String dbServerName, String dbName)
       throws SQLException, ClassNotFoundException {
     String url, username, password, driver;
     switch (dbServerName) {
@@ -45,6 +29,7 @@ public class DbConfig {
         username = env.getRequiredProperty("app.db.mongo.username");
         password = env.getRequiredProperty("app.db.mongo.password");
         driver = env.getRequiredProperty("app.db.mongo.driver");
+        dbName += "?authSource=admin";
         break;
       case "mysql":
       default:

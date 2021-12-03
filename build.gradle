@@ -23,6 +23,7 @@ dependencies {
     compile('mysql:mysql-connector-java')
     implementation files('unityjdbc.jar')
     compile('com.amazon.redshift:redshift-jdbc42:1.2.41.1065')
+    compile('org.mongodb:mongo-java-driver:3.4.1')
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

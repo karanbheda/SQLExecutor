@@ -6,8 +6,15 @@ var message = "";
 
 $("#erDiagButton").click(function () {
     $("#sqlOutput").hide();
-    $("#erDiag").show();
+    //$("#erDiag").show();
+    $("#erDiag").css("display","block");
 });
+
+$(".close").click(function(){
+    $("#sqlOutput").show();
+    $("#erDiag").css("display","none");
+})
+
 
 $("input[type='radio']").click(function () {
     if ($(this).val() === '1') {
@@ -15,6 +22,10 @@ $("input[type='radio']").click(function () {
     }
     else if ($(this).val() === '2') {
         PostFunction('changeDbServer?name=rds');
+    }
+    else if($(this).val() === '3')
+    {
+        PostFunction('changeDbServer?name=mongodb');
     }
     $("#loader").show();
     $(".form-loader").show();
@@ -233,3 +244,5 @@ $("#selectRecords").on("change", function () {
     records = parseInt($(this).val());
     SqlResult(pageNo)
 })
+
+$("#")

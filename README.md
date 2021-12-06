@@ -1,7 +1,3 @@
-[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
-[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
-[![Build Status](https://app.travis-ci.com/karanbheda/DbProject.svg?branch=master)](https://app.travis-ci.com/karanbheda/DbProject)
-[![PEP8](https://img.shields.io/badge/code%20style-pep8-orange.svg)](https://www.python.org/dev/peps/pep-0008/)
 ![Issues](https://img.shields.io/github/issues/karanbheda/DbProject)
 ![last commit](https://img.shields.io/github/last-commit/karanbheda/DbProject)
 ![total lines](https://img.shields.io/tokei/lines/github/karanbheda/DbProject)

@@ -5,6 +5,17 @@
 # DbProject
 This project is part of the course CS-527 at Rutgers University.
 
+# Installation
+Few things required before getting started with the project:
+ - Java 
+ - Gradle 
+      Installation - https://gradle.org/next-steps/?version=6.9.1&format=all
+      Environment Variable Setup - https://stackoverflow.com/a/48033901
+      
+1. Simply checkout the project
+2. Configure IDE to point to the required gradle version
+3. Voila! Project is ready to run - gradle bootrun
+
 # Tech Stack 
  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/spring/spring-original.svg" alt="springboot" width="20" height="20"/> Spring Boot </br>
  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/amazonwebservices/amazonwebservices-original.svg" alt="mongo" width="20" height="20"/> Amazon Web Services </br>
@@ -28,16 +39,3 @@ This project is part of the course CS-527 at Rutgers University.
    <td align="center"><a href="https://github.com/samyukthagopalsamy"><img src="https://avatars.githubusercontent.com/u/38600655?v=4" width="100px;" alt=""/><br /><sub><b>Samyuktha Gopalsamy</b></sub></a><br /></td>
   </tr>
 </table>
-
-
-
-# Installation
-Few things required before getting started with the project:
- - Java 
- - Gradle 
-      Installation - https://gradle.org/next-steps/?version=6.9.1&format=all
-      Environment Variable Setup - https://stackoverflow.com/a/48033901
-      
-1. Simply checkout the project
-2. Configure IDE to point to the required gradle version
-3. Voila! Project is ready to run - gradle bootrun

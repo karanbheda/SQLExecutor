@@ -5,6 +5,8 @@
 # DbProject
 This project is part of the course CS-527 at Rutgers University.
 
+The web application is designed to take the query given by the user as input and execute it on the data stored on our AWS. It connects to MySQL, RedShift, MongoDB databases on the server. The user is required to make this choice along with choosing either of the databases(Instacart, Adnimerge) for the query to be executed on. The query is then processed and its output is then displayed on the interface for the user to view. We have also included functionality for the user to view the ER diagram of the dataset when required. 
+
 # Installation
 Few things required before getting started with the project:
  - Java 

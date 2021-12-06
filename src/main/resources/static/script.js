@@ -26,6 +26,8 @@ $("input[type='radio']").click(function () {
         $("#loader").hide();
         $(".form-loader").hide();
     }, 750)
+    var dbserv=GetFunction('getDbServer');
+    document.documentElement.setAttribute("choice", dbserv);
 
 });
 
@@ -62,7 +64,8 @@ $(document).ready(function () {
     document.documentElement.setAttribute("data-theme", "dark");
     $("#loader").hide();
     $(".form-loader").hide();
-
+    var dbserv=GetFunction('getDbServer');
+    document.documentElement.setAttribute("choice", dbserv);
 });
 
 function GetFunction(funcName) {

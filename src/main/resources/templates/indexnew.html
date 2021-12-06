@@ -68,22 +68,17 @@
 
               <input type="radio" class="btn-check" name="choice" id="sql" autocomplete="off"
                      required
-                     onchange="PostFunction('changeDbServer?name=mysql')" checked value='1'>
+                     >
               <label for="sql">MySQL</label>
 
               <input type="radio" class="btn-check" name="choice" id="redshift" autocomplete="off"
                      required
-                     onchange="PostFunction('changeDbServer?name=rds')" value="2">
-              <label for="redshift">Redshift</label>
-
-              <input type="radio" class="btn-check" name="choice" id="mongodb" autocomplete="off"
-                     required
-                     onchange="PostFunction('changeDbServer?name=mongodb')" value="3">
-              <label for="mongoDB">Mongo DB</label><br><br>
+                     >
+              <label for="redshift">Redshift</label><br><br>
 
               <input type="radio" class="btn-check" name="choice" id="mongo" autocomplete="off"
                      required
-                     onchange="PostFunction('changeDbServer?name=rds')" value="3">
+                     >
               <label for="mongo">MongoDb</label><br><br>
 
 
@@ -110,19 +105,11 @@
     <!-- this is where er & result will go-->
     <div class="resultArea">
       <!-- er diag here-->
-
-      <div class="modal" id="erDiag">
+      <div class="outputBox" id="erDiag">
         <div class="image">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h2>ER Diagram</h2>
-              <span class="close">&times;</span>
-            </div>
-            <img src="../er.png">
-          </div>
+          <img src="../er.png">
         </div>
       </div>
-
       <!-- table result here-->
       <div class="outputBox" id="sqlOutput">
         <div class="table-container" style="overflow-x:auto;">

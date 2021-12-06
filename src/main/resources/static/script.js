@@ -6,15 +6,8 @@ var message = "";
 
 $("#erDiagButton").click(function () {
     $("#sqlOutput").hide();
-    //$("#erDiag").show();
-    $("#erDiag").css("display","block");
+    $("#erDiag").show();
 });
-
-$(".close").click(function(){
-    $("#sqlOutput").show();
-    $("#erDiag").css("display","none");
-})
-
 
 $("input[type='radio']").click(function () {
     if ($(this).val() === '1') {
@@ -22,10 +15,6 @@ $("input[type='radio']").click(function () {
     }
     else if ($(this).val() === '2') {
         PostFunction('changeDbServer?name=rds');
-    }
-    else if($(this).val() === '3')
-    {
-        PostFunction('changeDbServer?name=mongodb');
     }
     $("#loader").show();
     $(".form-loader").show();
@@ -40,6 +29,12 @@ $("input[type='radio']").click(function () {
 
 });
 
+$("input[class='btn-check']").on('change',function(){
+    GetFunction('ChangeDbServer?name');
+    GetFunction('getDbServer');
+    GetFunction('getDbList')
+  });
+  
 $('select#dbname').on('change', function() {
   PostFunction('changeDb?name='+this.value);
 });
@@ -62,7 +57,7 @@ $(document).ready(function () {
     $("#loader").show();
     $(".form-loader").show();
 
-  
+    GetFunction('getDbServer');
     GetFunction('getDbList');
     document.documentElement.setAttribute("data-theme", "dark");
     $("#loader").hide();
@@ -244,5 +239,3 @@ $("#selectRecords").on("change", function () {
     records = parseInt($(this).val());
     SqlResult(pageNo)
 })
-
-$("#")

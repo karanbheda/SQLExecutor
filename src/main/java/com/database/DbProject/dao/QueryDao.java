@@ -136,5 +136,9 @@ public class QueryDao {
 
     return databaseList;
   }
+
+  public String getDbServer() {
+    return DB_SV_NAME;
+  }
 }
 

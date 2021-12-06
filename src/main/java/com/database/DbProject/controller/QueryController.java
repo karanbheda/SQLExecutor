@@ -42,4 +42,9 @@ public class QueryController {
   public List<Map<String, Object>> getDbList() {
     return service.getDbList();
   }
+
+  @GetMapping("getDbServer")
+  public String getDbServer() {
+    return service.getDbServer();
+  }
 }

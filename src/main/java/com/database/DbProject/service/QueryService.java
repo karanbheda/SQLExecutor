@@ -58,4 +58,8 @@ public class QueryService {
   public List<Map<String, Object>> getDbList() {
     return queryDao.getDbList();
   }
+
+  public String getDbServer() {
+    return queryDao.getDbServer();
+  }
 }

@@ -1,5 +1,7 @@
 package com.database.DbProject.config;
 
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -49,9 +51,18 @@ public class DbConfig {
     props.setProperty("user", username);
     props.setProperty("password", password);
     conn = DriverManager.getConnection(url + dbName, props);
-
     return conn;
   }
 
-
+  public MongoClient getMongoDbConnection() {
+    String url = String
+        .format("mongodb://%s:%s@%s?", env.getRequiredProperty("app.db.mongo.username"),
+            env.getRequiredProperty("app.db.mongo.password"),
+            env.getRequiredProperty("app.db.mongo.url").split("//")[1], "?authSource=admin");
+    System.out.println(url);
+    MongoClientURI uri = new MongoClientURI(
+        url);
+    MongoClient mongoClient = new MongoClient(uri);
+    return mongoClient;
+  }
 }

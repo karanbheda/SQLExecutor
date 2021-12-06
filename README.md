@@ -1,3 +1,7 @@
+![Issues](https://img.shields.io/github/issues/karanbheda/DbProject)
+![last commit](https://img.shields.io/github/last-commit/karanbheda/DbProject)
+![total lines](https://img.shields.io/tokei/lines/github/karanbheda/DbProject)
+
 # DbProject
 This project is part of the course CS-527 at Rutgers University.
 

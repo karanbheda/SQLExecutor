@@ -2,8 +2,8 @@ package com.database.DbProject.dao;
 
 import com.database.DbProject.config.DbConfig;
 import com.database.DbProject.dto.SqlResponse;
+import com.mongodb.MongoClient;
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -92,8 +92,9 @@ public class QueryDao {
         return "select datname as database_name\n"
             + "from pg_database\n"
             + "order by oid;";
-      case "mysql":
       case "mongodb":
+        return "show dbs";
+      case "mysql":
       default:
         return "show databases";
     }
@@ -101,30 +102,21 @@ public class QueryDao {
 
   public List<Map<String, Object>> getDbList() {
     List<Map<String, Object>> databaseList = new ArrayList<>();
-    //db call and fill response
-    try (Connection connection = ds.getConnection(DB_SV_NAME, DB_NAME);) {
-      //Run the rest of the program
-      DatabaseMetaData metadata = connection.getMetaData();
-      try (ResultSet rs = metadata.getSchemas()) {
-        ResultSetMetaData metaData = rs.getMetaData();
 
-        while (rs.next()) {
+    if (DB_SV_NAME.equals("mongodb")) {
+      try (MongoClient connection = ds.getMongoDbConnection()) {
+        for (String dbName : connection.listDatabaseNames()) {
           Map<String, Object> rowData = new HashMap<>();
-          for (int i = 1; i <= metaData.getColumnCount(); i++) {
-            rowData.put(metaData.getColumnLabel(i), rs.getObject(metaData.getColumnName(i)));
-          }
+          rowData.put("value", dbName);
+          rowData.put("isSelected", dbName.equalsIgnoreCase(DB_NAME));
           databaseList.add(rowData);
         }
+      } catch (Exception e) {
+        e.printStackTrace();
       }
-    } catch (Exception e) {
-      e.printStackTrace();
+      return databaseList;
     }
 
-    return databaseList;
-  }
-
-  public List<Map<String, Object>> getDbList2() {
-    List<Map<String, Object>> databaseList = new ArrayList<>();
     //db call and fill response
     try (Connection connection = ds.getConnection(DB_SV_NAME, DB_NAME);
         PreparedStatement ps = connection.prepareStatement(this.getDatabaseListQuery())) {
@@ -133,13 +125,8 @@ public class QueryDao {
         while (rs.next()) {
           Map<String, Object> rowData = new HashMap<>();
           String dbName = rs.getString(1);
-          boolean isSelected = false;
-          if (dbName.equalsIgnoreCase(DB_NAME)) {
-            isSelected = true;
-          }
-
           rowData.put("value", dbName);
-          rowData.put("isSelected", isSelected);
+          rowData.put("isSelected", dbName.equalsIgnoreCase(DB_NAME));
           databaseList.add(rowData);
         }
       }
@@ -148,6 +135,10 @@ public class QueryDao {
     }
 
     return databaseList;
+  }
+
+  public String getDbServer() {
+    return DB_SV_NAME;
   }
 }
 

@@ -81,6 +81,12 @@
                      onchange="PostFunction('changeDbServer?name=mongodb')" value="3">
               <label for="mongoDB">Mongo DB</label><br><br>
 
+              <input type="radio" class="btn-check" name="choice" id="mongo" autocomplete="off"
+                     required
+                     onchange="PostFunction('changeDbServer?name=rds')" value="3">
+              <label for="mongo">MongoDb</label><br><br>
+
+
               <div class="valid-feedback mv-up">You selected a framework!</div>
               <div class="invalid-feedback mv-up">Please select a framework!</div>
             </div>
@@ -119,7 +125,7 @@
 
       <!-- table result here-->
       <div class="outputBox" id="sqlOutput">
-        <div class="table-container">
+        <div class="table-container" style="overflow-x:auto;">
           <div id="message"></div>
           <table id="result">
 

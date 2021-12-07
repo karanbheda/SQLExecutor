@@ -67,19 +67,22 @@
               </select><br><br>
 
               <input type="radio" class="btn-check" name="choice" id="sql" autocomplete="off"
+                     value="mysql"
                      required
-                     >
+              >
               <label for="sql">MySQL</label>
 
               <input type="radio" class="btn-check" name="choice" id="redshift" autocomplete="off"
+                     value="rds"
                      required
-                     >
-              <label for="redshift">Redshift</label><br><br>
+              >
+              <label for="redshift">Redshift</label>
 
-              <input type="radio" class="btn-check" name="choice" id="mongo" autocomplete="off"
+              <input type="radio" class="btn-check" name="choice" id="mongodb" autocomplete="off"
+                     value="mongodb"
                      required
-                     >
-              <label for="mongo">MongoDb</label><br><br>
+              >
+              <label for="mongodb">MongoDb</label><br><br>
 
 
               <div class="valid-feedback mv-up">You selected a framework!</div>
@@ -105,9 +108,15 @@
     <!-- this is where er & result will go-->
     <div class="resultArea">
       <!-- er diag here-->
-      <div class="outputBox" id="erDiag">
+      <div class="modal" id="erDiag">
         <div class="image">
-          <img src="../er.png">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2>ER Diagram</h2>
+              <span class="close">&times;</span>
+            </div>
+            <img src="../er.png">
+          </div>
         </div>
       </div>
       <!-- table result here-->

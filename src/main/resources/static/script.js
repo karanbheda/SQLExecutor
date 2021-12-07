@@ -6,37 +6,29 @@ var message = "";
 
 $("#erDiagButton").click(function () {
     $("#sqlOutput").hide();
-    $("#erDiag").show();
+    $("#erDiag").css("display","block");
 });
 
-$("input[type='radio']").click(function () {
-    if ($(this).val() === '1') {
-        PostFunction('changeDbServer?name=mysql');
-    }
-    else if ($(this).val() === '2') {
-        PostFunction('changeDbServer?name=rds');
-    }
+$(".close").click(function () {
+    $("#sqlOutput").show();
+    $("#erDiag").css("display","none");
+});
+
+$("input[name='choice']").click(function () {
     $("#loader").show();
     $(".form-loader").show();
 
-    setTimeout(() => {
-        GetFunction('getDbList');      
-    }, 250)
-    setTimeout(() => {
-        $("#loader").hide();
-        $(".form-loader").hide();
-    }, 750)
-    var dbserv=GetFunction('getDbServer');
-    document.documentElement.setAttribute("choice", dbserv);
+    PostFunction('changeDbServer?name=' + $(this).val(), {});
 
+    var dbSv = GetFunction('getDbServer');
+     $('#' + dbSv["value"]).prop('checked',true);
+    setDbList();
+    setTimeout(() => {
+            $("#loader").hide();
+            $(".form-loader").hide();
+        }, 750)
 });
 
-$("input[class='btn-check']").on('change',function(){
-    GetFunction('ChangeDbServer?name');
-    GetFunction('getDbServer');
-    GetFunction('getDbList')
-  });
-  
 $('select#dbname').on('change', function() {
   PostFunction('changeDb?name='+this.value);
 });
@@ -59,73 +51,67 @@ $(document).ready(function () {
     $("#loader").show();
     $(".form-loader").show();
 
-    GetFunction('getDbServer');
-    GetFunction('getDbList');
+    var dbSv = GetFunction('getDbServer');
+    $('#' + dbSv["value"]).prop('checked',true);
+    setDbList();
     document.documentElement.setAttribute("data-theme", "dark");
     $("#loader").hide();
     $(".form-loader").hide();
-    var dbserv=GetFunction('getDbServer');
-    document.documentElement.setAttribute("choice", dbserv);
 });
+
+function setDbList() {
+  var data = GetFunction('getDbList');
+  var model = ""
+  for (var i = 0; i < data.length; i++) {
+      if (data[i]["isSelected"] == true) {
+          model += "<option value=" + data[i]["value"] + " selected>" + data[i]["value"] + "</option>";
+      }
+      else {
+          model += "<option value=" + data[i]["value"] + ">" + data[i]["value"] + "</option>";
+      }
+  }
+  $("#dbname").html(model);
+}
 
 function GetFunction(funcName) {
     var AppPath = '/queryApi/' + funcName;
-    var model = '';
+    var json =''
     $.ajax({
         url: AppPath,
         data: {},
         dataType: 'json',
         contentType: 'application/json; charset=utf-8',
         type: "GET",
-        async: true,
+        async: false,
         success: function (data) {
-
-            for (var i = 0; i < data.length; i++) {
-                if (data[i]["isSelected"] == true) {
-                    model += "<option value=" + data[i]["value"] + " selected>" + data[i]["value"] + "</option>";
-                }
-                else {
-                    model += "<option value=" + data[i]["value"] + ">" + data[i]["value"] + "</option>";
-                }
-            }
-            $("#dbname").html(model);
-            return false;
-
+          json = data;
         },
         error: function () {
             console.log("error" + funcName)
         }
     })
+    return json
 }
 
-function PostFunction(funcName) {
+function PostFunction(funcName, input) {
     var AppPath = '/queryApi/' + funcName;
-
-    var ans = {
-        query: $("#query").val(),
-        page: 1,
-        records: 50,
-        fromCache: false
-    };
- 
-
+    var json = ''
 
     $.ajax({
         url: AppPath,
-        data: JSON.stringify(ans),
+        data: JSON.stringify(input),
         dataType: 'json',
         contentType: 'application/json; charset=utf-8',
         type: "POST",
-        async: true,
+        async: false,
         success: function (data) {
-            return false;
-
+            json =  data;
         },
         error: function () {
             console.log("error" + funcName)
         }
     })
-
+  return json;
 }
 
 function refreshPages() {
@@ -142,12 +128,12 @@ function refreshPages() {
         },
         afterPageOnClick: function () {
             if (cachedData != undefined && cachedData.length > 0)
-                SqlResult(pageNo);
+                SqlResult(pageNo, true);
         }
     })
 }
 
-function SqlResult(page) {
+function SqlResult(page, fromCache = false) {
     $("#loader").show();
     $(".form-loader").show();
 
@@ -169,7 +155,7 @@ function SqlResult(page) {
         query: $("#query").val(),
         page: page,
         records: records,
-        fromCache: false
+        fromCache: fromCache
     };
 
 
@@ -193,7 +179,6 @@ function SqlResult(page) {
                     return;
                 }
                 totalRecords = obj.totalRecords;
-                console.log(totalRecords)
                 cachedData = new Array(totalRecords);
                 var table = "<thead><tr>";
                 var j = 0;
@@ -240,5 +225,6 @@ function SqlResult(page) {
 
 $("#selectRecords").on("change", function () {
     records = parseInt($(this).val());
-    SqlResult(pageNo)
+    pageNo = 1;
+    SqlResult(pageNo, true)
 })

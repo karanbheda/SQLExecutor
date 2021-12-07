@@ -2,6 +2,7 @@ package com.database.DbProject.controller;
 
 import com.database.DbProject.dto.SqlResponse;
 import com.database.DbProject.service.QueryService;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,7 @@ public class QueryController {
   }
 
   @GetMapping("getDbServer")
-  public String getDbServer() {
-    return service.getDbServer();
+  public Map<String, String> getDbServer() {
+    return Collections.singletonMap("value", service.getDbServer());
   }
 }

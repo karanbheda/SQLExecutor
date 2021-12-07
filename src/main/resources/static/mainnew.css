@@ -123,7 +123,7 @@ html, body {
     background-color: var(--background-color);
     font-size: 15px;
     font-weight: 300;
-    color: #8D8D8D;
+    color: var(--text-color);
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
     margin-top: 16px;
@@ -167,8 +167,8 @@ html, body {
 
 .form-content textarea:hover, .form-content textarea:focus {
     border: 0;
-    background-color: #ebeff8;
-    color: #8D8D8D;
+    background-color: var(--input-bg);
+    color: var(--text-color);
 }
 
 .mv-up{
@@ -232,7 +232,7 @@ table#result  {
     scrollbar-color: #6969dd #e0e0e0;
     scrollbar-width: thin;
     white-space: nowrap;
-    max-width: fit-content;
+    max-width: -webkit-fill-available
 }
 
 table#result thead {
@@ -253,7 +253,6 @@ table#result th {
     font-weight: 700;
     border-bottom: 1px solid var(--border-color) !important;
     white-space: nowrap;
-    max-width: fit-content;
     overflow: auto;
     position: relative;
 
@@ -266,7 +265,7 @@ table#result th, table#result td {
     overflow: hidden;
     text-overflow: ellipsis;
     display: inline-block;
-
+    min-height: 26px;
 }
 
 table#result td {
@@ -280,7 +279,6 @@ table#result th:last-child, table#result td:last-child {
 
 .table-container {
     height: 100%;
-    overflow-x: auto;
 }
 
 ul.horizontal {

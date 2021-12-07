@@ -55,6 +55,8 @@ public class QueryDao {
 
     } catch (Exception e) {
       e.printStackTrace();
+      System.out.println("Error message -------------------------------------------------");
+      System.out.println(e.getMessage());
       response.setMessage(e.getMessage());
       response.setData(null);
       response.setTotalRecords(0);

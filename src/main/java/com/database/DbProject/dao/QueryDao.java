@@ -43,7 +43,8 @@ public class QueryDao {
         while (rs.next()) {
           Map<String, Object> rowData = new HashMap<>();
           for (int i = 1; i <= metaData.getColumnCount(); i++) {
-            rowData.put(metaData.getColumnLabel(i), rs.getObject(metaData.getColumnName(i)));
+            rowData.put(metaData.getColumnLabel(i),
+                rs.getObject(metaData.getColumnName(i)).toString());
           }
 
           sqlData.add(rowData);

@@ -34,19 +34,19 @@ html, body {
     overflow: hidden;
     color: var(--text-color);
 }
-  
+
 .row {
     display: flex;
     flex-direction: initial;
 }
 
 .form-holder {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      min-height: 100vh;
-      flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+    flex: 1;
 }
 
 .resultArea {
@@ -54,7 +54,7 @@ html, body {
 }
 
 .outputBox {
-   margin-top: 1.5rem;
+    margin-top: 1.5rem;
 
 }
 
@@ -142,7 +142,7 @@ html, body {
     background-color: #495056;
     outline: none !important;
     border: none !important;
-     box-shadow: none;
+    box-shadow: none;
 }
 
 .form-content textarea {
@@ -181,7 +181,7 @@ html, body {
 }
 
 .valid-feedback{
-   color: #2acc80;
+    color: #2acc80;
 }
 
 .image, .image > img {
@@ -223,29 +223,40 @@ html, body {
     display: none;
 }
 
-table#result  { 
-    display: inline-block; 
-    overflow: auto; 
-    border-collapse: collapse; 
+table#result  {
+    display: inline-block;
+    overflow: auto;
+    border-collapse: collapse;
     height: 90%;
     margin: 1rem 1rem 0 1rem;
     scrollbar-color: #6969dd #e0e0e0;
     scrollbar-width: thin;
+    white-space: nowrap;
+    max-width: fit-content;
 }
 
-table#result thead { 
-    margin-top: -2rem; 
-    position: absolute; 
+table#result thead {
+    margin-top: -2rem;
+    white-space: nowrap;
+    max-width: fit-content;
+    overflow: auto;
+    position: relative;
+
 }
 
-table#result tr:nth-child(even) { 
-    background: var(--table-even); 
+table#result tr:nth-child(even) {
+    background: var(--table-even);
 }
 
 table#result th {
     text-align: center;
     font-weight: 700;
     border-bottom: 1px solid var(--border-color) !important;
+    white-space: nowrap;
+    max-width: fit-content;
+    overflow: auto;
+    position: relative;
+
 }
 
 table#result th, table#result td {
@@ -255,6 +266,7 @@ table#result th, table#result td {
     overflow: hidden;
     text-overflow: ellipsis;
     display: inline-block;
+
 }
 
 table#result td {
@@ -263,6 +275,7 @@ table#result td {
 
 table#result th:last-child, table#result td:last-child {
     border: none;
+
 }
 
 .table-container {
@@ -307,27 +320,27 @@ ul.horizontal li a.active {
 
 table#result::-webkit-scrollbar {
     width: 12px;               /* width of the entire scrollbar */
-  }
-  
-  table#result::-webkit-scrollbar-track {
+}
+
+table#result::-webkit-scrollbar-track {
     background: transparent;        /* color of the tracking area */
-  }
-  
-  table#result::-webkit-scrollbar-thumb {
+}
+
+table#result::-webkit-scrollbar-thumb {
     background-color: var(--input-bg);    /* color of the scroll thumb */
     border-radius: 20px;       /* roundness of the scroll thumb */
     border: transparent  /* creates padding around scroll thumb */
-  }
+}
 
 
 #loader {
-        display: none;
-        z-index: 99;
-        position: absolute;
-        margin: 0 auto;
-        top: 40%;
-        left: 40%;
-        width: 12%;
+    display: none;
+    z-index: 99;
+    position: absolute;
+    margin: 0 auto;
+    top: 40%;
+    left: 40%;
+    width: 12%;
 }
 
 .form-loader{
@@ -372,25 +385,24 @@ table#result::-webkit-scrollbar {
 }
 
 .erModel{
-position: relative;
-     margin: 5% auto;
-     padding: 35px;
-     border: 5px solid #888;
-     width: 83%;
-     }
+    position: relative;
+    margin: 5% auto;
+    padding: 35px;
+    border: 5px solid #888;
+    width: 83%;
+}
 
 /* The Close Button */
 .close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
 }
 
 .close:hover,
 .close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }
-

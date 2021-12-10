@@ -29,31 +29,45 @@ public class QueryDao {
 
   public SqlResponse getSqlOutput(final String query) {
     response = new SqlResponse();
-
     //db call and fill response
     try (Connection connection = ds.getConnection(DB_SV_NAME, DB_NAME);
         PreparedStatement ps = connection.prepareStatement(query)) {
       long startTime = System.currentTimeMillis();
       //Run the rest of the program
-      try (ResultSet rs = ps.executeQuery()) {
-        response.setResponseTime((System.currentTimeMillis() - startTime) / 1000d);
-        ResultSetMetaData metaData = rs.getMetaData();
-        List<Map<String, Object>> sqlData = new ArrayList<>();
+      boolean hasMoreResultSets = ps.execute(query);
+      while (hasMoreResultSets || ps.getUpdateCount() != -1) {
+        if (hasMoreResultSets) {
+          try (ResultSet rs = ps.getResultSet()) {
+            response = new SqlResponse();
+            response.setResponseTime((System.currentTimeMillis() - startTime) / 1000d);
+            ResultSetMetaData metaData = rs.getMetaData();
+            List<Map<String, Object>> sqlData = new ArrayList<>();
 
-        while (rs.next()) {
-          Map<String, Object> rowData = new HashMap<>();
-          for (int i = 1; i <= metaData.getColumnCount(); i++) {
-            rowData.put(metaData.getColumnLabel(i),
-                rs.getObject(metaData.getColumnName(i)).toString());
+            while (rs.next()) {
+              Map<String, Object> rowData = new HashMap<>();
+              for (int i = 1; i <= metaData.getColumnCount(); i++) {
+                rowData.put(metaData.getColumnLabel(i),
+                    rs.getObject(metaData.getColumnName(i)).toString());
+              }
+
+              sqlData.add(rowData);
+            }
+
+            response.setTotalRecords(sqlData.size());
+            response.setData(sqlData);
           }
-
-          sqlData.add(rowData);
+        } else {
+          int queryResult = ps.getUpdateCount();
+          if (queryResult == -1) {
+            continue;
+          }
+          response.setMessage("Query run successfully.");
+          response.setData(null);
+          response.setTotalRecords(0);
         }
 
-        response.setTotalRecords(sqlData.size());
-        response.setData(sqlData);
+        hasMoreResultSets = ps.getMoreResults();
       }
-
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("Error message -------------------------------------------------");

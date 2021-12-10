@@ -16,22 +16,23 @@ public class DbConfig {
   @Autowired
   Environment env;
 
-  public Connection getConnection(final String dbServerName, String dbName)
+  public Connection getConnection(final String dbServerName, final String dbName)
       throws SQLException, ClassNotFoundException {
-    String url, username, password, driver;
+    String url, username, password, driver, conString = "";
     switch (dbServerName) {
       case "rds":
         url = env.getRequiredProperty("app.db.rds.url");
         username = env.getRequiredProperty("app.db.rds.username");
         password = env.getRequiredProperty("app.db.rds.password");
         driver = env.getRequiredProperty("app.db.rds.driver");
+        conString = String.format("%s%s%s", url, dbName, "?allowMultiQueries=true");
         break;
       case "mongodb":
         url = env.getRequiredProperty("app.db.mongo.url");
         username = env.getRequiredProperty("app.db.mongo.username");
         password = env.getRequiredProperty("app.db.mongo.password");
         driver = env.getRequiredProperty("app.db.mongo.driver");
-        dbName += "?authSource=admin";
+        conString = String.format("%s%s%s", url, dbName, "?authSource=admin");
         break;
       case "mysql":
       default:
@@ -39,6 +40,7 @@ public class DbConfig {
         username = env.getRequiredProperty("app.db.mysql.username");
         password = env.getRequiredProperty("app.db.mysql.password");
         driver = env.getRequiredProperty("app.db.mysql.driver");
+        conString = String.format("%s%s%s", url, dbName, "?allowMultiQueries=true");
         break;
     }
 
@@ -50,7 +52,7 @@ public class DbConfig {
 
     props.setProperty("user", username);
     props.setProperty("password", password);
-    conn = DriverManager.getConnection(url + dbName, props);
+    conn = DriverManager.getConnection(conString, props);
     return conn;
   }
 

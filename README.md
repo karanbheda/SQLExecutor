@@ -1,8 +1,8 @@
-![Issues](https://img.shields.io/github/issues/karanbheda/DbProject)
-![last commit](https://img.shields.io/github/last-commit/karanbheda/DbProject)
-![total lines](https://img.shields.io/tokei/lines/github/karanbheda/DbProject)
+![Issues](https://img.shields.io/github/issues/karanbheda/SQLExecutor)
+![last commit](https://img.shields.io/github/last-commit/karanbheda/SQLExecutor)
+![total lines](https://img.shields.io/tokei/lines/github/karanbheda/SQLExecutor)
 
-# DbProject
+# SQL Executor
 This project is part of the course CS-527 at Rutgers University.
 
 The web application is designed to take the query given by the user as input and execute it on the data stored on our AWS. It connects to MySQL, RedShift, MongoDB databases on the server. The user is required to make this choice along with choosing either of the databases(Instacart, Adnimerge) for the query to be executed on. The query is then processed and its output is then displayed on the interface for the user to view. We have also included functionality for the user to view the ER diagram of the dataset when required. 
